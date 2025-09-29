@@ -1,0 +1,19 @@
+{
+	"extension": {
+		"version": "0.7.2025041600",
+		"json": 2
+	},
+	"project": {
+		"name": "Preseason_Code",
+		"description": "This is the first code for our first robot. This code is primarily for our first class scrimage which is October 1-2, 2025.",
+		"creationDate": "9/29/2025, 1:51:49 PM",
+		"platform": "V5",
+		"language": "cpp",
+		"slot": 1,
+		"sdkVersion": "V5_20240802_15_00_00",
+		"cpp": {
+			"includePath": [],
+			"printf_float": true
+		}
+	}
+}
