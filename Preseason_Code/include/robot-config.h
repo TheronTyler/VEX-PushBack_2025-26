@@ -8,12 +8,12 @@ competition Competition;
 brain Brain;
 controller Controller;
 
-motor fLDrive = motor(PORT8, ratio36_1, true);
-motor bLDrive = motor(PORT9, ratio36_1, true);
-motor uLDrive = motor(PORT10, ratio36_1);
-motor fRDrive = motor(PORT2, ratio36_1);
-motor bRDrive = motor(PORT5, ratio36_1);
-motor uRDrive = motor(PORT4, ratio36_1, false);
+motor fLDrive = motor(PORT9, ratio36_1, true);
+motor bLDrive = motor(PORT7, ratio36_1, true);
+motor uLDrive = motor(PORT8, ratio36_1);
+motor fRDrive = motor(PORT19, ratio36_1);
+motor bRDrive = motor(PORT17, ratio36_1);
+motor uRDrive = motor(PORT18, ratio36_1, true);
 
 motor Lintake = motor(PORT10);
 motor Mintake = motor(PORT15, true);

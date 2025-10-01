@@ -18,14 +18,29 @@ void pre_auton(void) {
   motor_group(Uintake, Mintake, Lintake).setVelocity(95, pct);
 
   //Stopping
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(brake);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   motor_group(Uintake, Mintake, Lintake).setStopping(coast);
 }
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  motor_group(fLDrive, bLDrive, uLDrive).spinFor(.58, rev, false);
+  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.58, rev, false);
+  wait(1.67,sec);
+  
+  //motor_group(Uintake, Mintake, Lintake).spinFor(1.98, rev, false);
+
+  motor_group(fLDrive, bLDrive, uLDrive).spinFor(-.18, rev, false);
+  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.18, rev);
+wait(.67, sec);
+  motor_group(fLDrive, bLDrive, uLDrive).spinFor(.4, rev, false);
+  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.4, rev, false);
+
+  wait(.4, sec);
+
+  motor_group(Uintake, Mintake, Lintake).spinFor(-2.5, rev, false);
+
+  //intake
+
 }
 
 void usercontrol(void) {
