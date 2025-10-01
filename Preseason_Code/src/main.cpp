@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       Theron Tyler                                                     */
+/*    Author:       Theron Tyler                                              */
 /*    Created:      9/29/2025, 1:51:49 PM                                     */
 /*    Description:  V5 project                                                */
 /*                                                                            */
@@ -9,6 +9,7 @@
 
 #include "robot-config.h"
 #include "vex.h"
+#include "PID.h"
 
 using namespace vex;
 
@@ -18,7 +19,7 @@ void pre_auton(void) {
   motor_group(Uintake, Mintake, Lintake).setVelocity(95, pct);
 
   //Stopping
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(brake);
+ 
   motor_group(Uintake, Mintake, Lintake).setStopping(coast);
 }
 
@@ -31,10 +32,12 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-  
+
   //Drivetrain
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
+
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
 
   motor_group(fLDrive, bLDrive, uLDrive).spin(fwd, (lateral)*.5 + rotational, pct);
   motor_group(fRDrive, bRDrive, uRDrive).spin(reverse, (lateral)*.5 - rotational, pct);
