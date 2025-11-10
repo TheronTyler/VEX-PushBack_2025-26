@@ -3,9 +3,9 @@
 
 void turn(float turnTarget){
   sense.setHeading(180, degrees);
-  float turnKp = .25; //needs tuned
-  float turnKi = .27; //needs tuned
-  float turnKd = .35; //needs tuned
+  float turnKp = .401 ; //needs tuned
+  float turnKi = .09; //needs tuned
+  float turnKd = .29; //needs tuned
   float turnError = turnTarget - sense.heading();
   
   while(fabs(turnError) > 3){
@@ -16,14 +16,14 @@ void turn(float turnTarget){
   float turnD = turnKd * (turnError - previousTurnError)/1;
 
     motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,  (turnP  + turnI + turnD), pct);
-    motor_group(fRDrive, bRDrive, uLDrive).spin(fwd,  -1*(turnP  + turnI + turnD), pct);
+    motor_group(fRDrive, bRDrive, uRDrive).spin(fwd,  -1*(turnP  + turnI + turnD), pct);
     wait (20, msec);
   }
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(brake);
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(fwd, 0, pct);
 }
 
-void drive(float driveTarget){ //  (DISTANCE / 35.5)*360
+void drive(float driveTarget){  //(DISTANCE / 47.33)*360
   fLDrive.setPosition(0, deg);
   fRDrive.setPosition(0, deg);
 
