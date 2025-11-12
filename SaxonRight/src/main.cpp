@@ -30,9 +30,9 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-  drive(236);
+  drive(236); //drive to loader
   wait(0.05, sec);
-  turn(263);
+  turn(263); //face loader
   scraper.set(true);
   wait(0.25, sec);
     intakeupper.setVelocity(10, pct);
@@ -46,36 +46,50 @@ void autonomous(void) {
     motor_group(fRDrive, bRDrive, uRDrive).spinFor(reverse, .03, rev);
     motor_group(fLDrive, bLDrive, uLDrive).spinFor(fwd, .025, rev, false);
     motor_group(fRDrive, bRDrive, uRDrive).spinFor(fwd, .025, rev);
-  wait(.575, sec);
+  wait(.475, sec);
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();
-  wait(1, sec);
+  wait(.375, sec);
+  turn(182); //re align
+  drive(-235); //drive to goal
   motor_group(intakelower, intakeupper).stop();
-  turn(182);
-  drive(-207);
   scraper.set(false);
     intakeupper.setVelocity(100, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
-    intakeupper.spinFor(reverse, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false); // score in goal
     wait(1.5, sec);
     motor_group(intakeupper, intakelower).stop();
-    drive(40);
-    turn(286);
+    drive(40); //get off goal
+    turn(286); //turn to nearest 3 stack
+    
     intakeupper.setVelocity(10, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
-    intakeupper.spinFor(fwd, 676767, deg, false); 
-    drive(217);
+    intakeupper.spinFor(fwd, 676767, deg, false); //run intake
+    drive(235);// pick up 3 stack
     wait(0.05, sec);
-    turn(156);
+    turn(159); //turn to next 3 stack
     wait(0.05, sec);
-    drive(270);
-    turn(135);
+    drive(275);
+    drive(50); //drive to next 3 stack
+    turn(133.5); //turn to face mid goal
+    drive(-90); //drive to mid goal
     intakeupper.setVelocity(100, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
-    intakeupper.spinFor(reverse, 676767, deg, false);
-
+    intakeupper.spinFor(reverse, 676767, deg, false); //score mid goal
+    wait(.5, sec);
+     motor_group(intakeupper, intakelower).stop();
+  drive(358);
+  wait(50, msec); //drive in between long goal and loader
+  turn(135);
+  wait(0.05, sec);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(100, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, .6, sec);
+    intakeupper.setVelocity(100, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false); //score long goal
  /* drive(91.27); //prepare to pick up blocks
     intakeupper.setVelocity(10, pct);
     intakelower.setVelocity(100, pct);
