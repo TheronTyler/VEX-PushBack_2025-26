@@ -4,12 +4,12 @@
 		"json": 2
 	},
 	"project": {
-		"name": "SaxonRight",
+		"name": "SaxonRightSAWP",
 		"description": "",
 		"creationDate": "11/12/2025, 9:16:42 AM",
 		"platform": "V5",
 		"language": "cpp",
-		"slot": 2,
+		"slot": 3,
 		"sdkVersion": "V5_20240802_15_00_00",
 		"cpp": {
 			"includePath": [],
