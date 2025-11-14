@@ -18,7 +18,7 @@ using namespace vex;
 // A global instance of competition
 void pre_auton(void) {
 sense.calibrate();
-Brain.Screen.drawImageFromFile("aleiaWeiner.png", 0, 0);
+Brain.Screen.drawImageFromFile("Aleiaweiner.png", 0, 0);
 
 
 
@@ -95,6 +95,8 @@ void autonomous(void) {
    //score goal
 }
 void usercontrol(void) {
+  Brain.Screen.clearScreen();
+  Brain.Screen.drawImageFromFile("WeMisshunter.png", 0, 0);
 while (1) {
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   

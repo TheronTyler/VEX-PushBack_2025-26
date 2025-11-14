@@ -95,6 +95,8 @@ void autonomous(void) {
   
 }
 void usercontrol(void) {
+  Brain.Screen.clearScreen();
+  Brain.Screen.drawImageFromFile("WeMisshunter.png", 0, 0);
 while (1) {
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   
