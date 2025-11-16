@@ -53,7 +53,7 @@ void autonomous(void) {
   drive(240.63);
   wait(0.25, sec);
   turn(240);
-  drive(-120);
+  drive(-115);
   intakeupper.setVelocity(100, pct);
   intakelower.setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, deg, false);
