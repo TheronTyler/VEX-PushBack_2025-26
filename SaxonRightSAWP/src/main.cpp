@@ -1,0 +1,160 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       Theron Tyler                                              */
+/*    Created:      9/20/2024, 8:15:00 AM                                     */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+#include "robot-config.h"
+#include "PID.h"
+#include "sort.h"
+#include "vex.h"
+
+//#include "turnHeading.h"
+
+using namespace vex;
+
+// A global instance of competition
+void pre_auton(void) {
+sense.calibrate();
+Brain.Screen.drawImageFromFile("ILoveCaleb.png", 0, 0);
+
+
+
+//Speed
+motor_group(intakeupper, intakelower).setVelocity(95,pct);
+
+
+//Stopping
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
+motor_group(intakeupper, intakelower).setStopping(brake);
+
+}
+
+void autonomous(void) {
+  drive(236); //drive to loader
+  wait(0.05, sec);
+  turn(263); //face loader
+  scraper.set(true);
+  wait(0.25, sec);
+    intakeupper.setVelocity(10, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(fwd, 676767, deg, false); 
+ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(30, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, .6, sec);
+  wait(.05, sec);
+    motor_group(fLDrive, bLDrive, uLDrive).spinFor(reverse, .03, rev, false);
+    motor_group(fRDrive, bRDrive, uRDrive).spinFor(reverse, .03, rev);
+    motor_group(fLDrive, bLDrive, uLDrive).spinFor(fwd, .025, rev, false);
+    motor_group(fRDrive, bRDrive, uRDrive).spinFor(fwd, .025, rev);
+  wait(.475, sec);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();
+  wait(.375, sec);
+  turn(182); //re align
+  drive(-235); //drive to goal
+  motor_group(intakelower, intakeupper).stop();
+  scraper.set(false);
+    intakeupper.setVelocity(100, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false); // score in goal
+    wait(1.5, sec);
+    motor_group(intakeupper, intakelower).stop();
+    drive(40); //get off goal
+    turn(286); //turn to nearest 3 stack
+    intakeupper.setVelocity(10, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(fwd, 676767, deg, false); //run intake
+    drive(235);// pick up 3 stack
+    wait(0.05, sec);
+    turn(159); //turn to next 3 stack
+    wait(0.05, sec);
+    drive(275);
+    drive(50); //drive to next 3 stack
+    turn(133.5); //turn to face mid goal
+    drive(-90); //drive to mid goal
+    intakeupper.setVelocity(100, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false); //score mid goal
+    wait(.5, sec);
+     motor_group(intakeupper, intakelower).stop();
+  drive(358);
+  wait(50, msec); //drive in between long goal and loader
+  turn(135);
+  wait(0.05, sec);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(100, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, .6, sec);
+    intakeupper.setVelocity(100, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false); //score long goal
+  
+}
+void usercontrol(void) {
+  Brain.Screen.clearScreen();
+  Brain.Screen.drawImageFromFile("WeMisshunter.png", 0, 0);
+while (1) {
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
+  
+  //Drive
+  int rotational = Controller.Axis3.position(pct);
+  int lateral = Controller.Axis1.position(pct);
+
+  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral)*.5 + rotational,pct);
+  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral)*.5 - rotational,pct);
+
+  //Intake
+  if (Controller.ButtonL1.pressing()) {
+    intakelower.spin(fwd, 100, pct);
+    intakeupper.spin(fwd, 10, pct);
+  }
+  else if (Controller.ButtonL2.pressing()) {
+    intakeupper.spin(fwd, 100, pct);
+    intakelower.spin(reverse, 100, pct);
+  }
+  else if (Controller.ButtonR2.pressing()) {
+    intakeupper.spin(reverse, 100, pct);
+    intakelower.spin(fwd, 100, pct);
+  }
+  else {
+    intakeupper.stop();
+    intakelower.stop();
+
+  }
+
+  //Wings
+  if (Controller.ButtonRight.pressing()) {
+    wings.set(true);
+  }
+  else if (Controller.ButtonY.pressing()) {
+    wings.set(false);
+  }
+
+  //Scraper
+  if (Controller.ButtonDown.pressing()) {
+    scraper.set(true);
+  }
+  else if (Controller.ButtonB.pressing()) {
+    scraper.set(false);
+  }
+  
+  wait(30, msec);
+
+}
+
+}
+
+int main() {
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
+
+  pre_auton();
+
+  while (true) {
+    wait(100, msec);
+  }
+}

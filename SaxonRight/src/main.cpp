@@ -8,6 +8,8 @@
 /*----------------------------------------------------------------------------*/
 #include "robot-config.h"
 #include "PID.h"
+#include "sort.h"
+#include "vex.h"
 
 //#include "turnHeading.h"
 
@@ -15,6 +17,12 @@ using namespace vex;
 
 // A global instance of competition
 void pre_auton(void) {
+sense.calibrate();
+Brain.Screen.drawImageFromFile("Aleiaweiner.png", 0, 0);
+
+
+
+
 
 //Speed
 motor_group(intakeupper, intakelower).setVelocity(95,pct);
@@ -27,63 +35,68 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-  drive(91.27);
+  drive(91.27); //prepare to pick up blocks
     intakeupper.setVelocity(10, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
-    intakeupper.spinFor(fwd, 676767, deg, false);
-  turn(150);
-  drive(98.88);
+    intakeupper.spinFor(fwd, 676767, deg, false); //begin intake spinning
+  turn(210); //turn to face blocks
+  drive(90.88); //drive to pick up blocks
   wait(50, msec);
-  drive(45.64);
-  turn(75);
+  drive(40.64); 
+  turn(193);
+  drive(132.55);
+  drive(70);
+  wait(0.5, sec);
+  drive(-202.55);
+  turn(240);
+  drive(240.63);
+  wait(0.25, sec);
+  turn(240);
+  drive(-115);
+  intakeupper.setVelocity(100, pct);
+  intakelower.setVelocity(100, pct);
+  intakelower.spinFor(fwd, 676767, deg, false);
+  intakeupper.spinFor(reverse, 676767, deg, false);
+  wait(1.25, sec);
   motor_group(intakeupper, intakelower).stop();
-  drive(-91.27);
-    intakeupper.setVelocity(100, pct);
+  scraper.set(true);
+  drive(167.76);
+    intakeupper.setVelocity(10, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
-    intakeupper.spinFor(reverse, 676767, deg, false);
-  wait(1.75, sec);
-  motor_group(intakeupper, intakelower).stop();
-  drive(357.49);
-  turn(135);
-
-
-  /*intakeupper.setVelocity(15, pct);
+    intakeupper.spinFor(fwd, 676767, deg, false); 
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(30, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, .6, sec);
+  wait(.05, sec);
+    motor_group(fLDrive, bLDrive, uLDrive).spinFor(reverse, .025, rev, false);
+    motor_group(fRDrive, bRDrive, uRDrive).spinFor(reverse, .025, rev);
+    motor_group(fLDrive, bLDrive, uLDrive).spinFor(fwd, .025, rev, false);
+    motor_group(fRDrive, bRDrive, uRDrive).spinFor(fwd, .025, rev);
+    wait(0.1, sec);
+    turn(182);
+    drive(-210.76);
+  intakeupper.setVelocity(100, pct);
   intakelower.setVelocity(100, pct);
-  intakelower.spinTo(25000, degrees, false);
-  intakeupper.spinTo(250, degrees, false);
+  intakelower.spinFor(fwd, 676767, deg, false);
+  intakeupper.spinFor(reverse, 676767, deg, false);
 
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(300, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(300, degrees, false);
- wait(2, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(-40, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(40, degrees, false);
- wait(0.75, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(80, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(80, degrees, false);
- wait(0.85, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(-180, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(-180, degrees, false);
- wait(0.75, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(-65, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(65, degrees, false);
- wait(0.5, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(270, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(270, degrees, false);
- wait(1.3, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(-45, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(45, degrees, false);
- wait(1, sec);
- motor_group(fRDrive, bRDrive, uRDrive).spinFor(-160, degrees, false);
- motor_group(fLDrive, bLDrive, uLDrive).spinFor(-160, degrees, false);
- wait(0.2, sec);
- intakeupper.setVelocity(100, pct);
- intakelower.spinTo(250000, degrees, false);
-intakeupper.spinTo(-250000, degrees, false);
-*/
+
+  //slower drive to ensure pickup
+   //turn to face under goal blocks
+   //drive into blocks and pick up
+   //drive back
+   //turn towards long goal and loader
+   //drive to between long goal and loader
+   //turn to face loader
+   //drop scraper
+   //drive into loader
+   //back into goal
+   //score goal
 }
 void usercontrol(void) {
+  Brain.Screen.clearScreen();
+  Brain.Screen.drawImageFromFile("WeMisshunter.png", 0, 0);
 while (1) {
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   
@@ -100,12 +113,12 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
     intakeupper.spin(fwd, 10, pct);
   }
   else if (Controller.ButtonL2.pressing()) {
-    intakeupper.spin(reverse, 80, pct);
-    intakelower.spin(reverse, 80, pct);
+    intakeupper.spin(fwd, 100, pct);
+    intakelower.spin(reverse, 100, pct);
   }
   else if (Controller.ButtonR2.pressing()) {
-    intakeupper.spin(reverse, 80, pct);
-    intakelower.spin(fwd, 80, pct);
+    intakeupper.spin(reverse, 100, pct);
+    intakelower.spin(fwd, 100, pct);
   }
   else {
     intakeupper.stop();

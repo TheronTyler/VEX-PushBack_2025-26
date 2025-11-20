@@ -22,3 +22,5 @@ static digital_out wings = digital_out(Brain.ThreeWirePort.G);
 static digital_out scraper = digital_out(Brain.ThreeWirePort.H);
 
 static inertial sense = inertial(PORT10);
+
+static optical color_sort = optical(PORT12);
