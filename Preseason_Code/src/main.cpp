@@ -1,107 +1,146 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       Theron Tyler                                                     */
-/*    Created:      9/29/2025, 1:51:49 PM                                     */
+/*    Author:       Theron Tyler                                              */
+/*    Created:      9/20/2024, 8:15:00 AM                                     */
 /*    Description:  V5 project                                                */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-
 #include "robot-config.h"
-#include "vex.h"
+#include "PID.h"
+
+//#include "turnHeading.h"
 
 using namespace vex;
 
+// A global instance of competition
 void pre_auton(void) {
 
-  //Speed
-  motor_group(Uintake, Mintake, Lintake).setVelocity(95, pct);
+//Speed
+motor_group(intakeupper, intakelower).setVelocity(95,pct);
 
-  //Stopping
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
-  motor_group(Uintake, Mintake, Lintake).setStopping(coast);
+
+//Stopping
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
+motor_group(intakeupper, intakelower).setStopping(brake);
+
 }
 
 void autonomous(void) {
-  motor_group(fLDrive, bLDrive, uLDrive).spinFor(.58, rev, false);
-  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.58, rev, false);
-  wait(1.67,sec);
-  
-  //motor_group(Uintake, Mintake, Lintake).spinFor(1.98, rev, false);
+  drive(91.27);
+    intakeupper.setVelocity(10, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(fwd, 676767, deg, false);
+  turn(150);
+  drive(98.88);
+  wait(50, msec);
+  drive(45.64);
+  turn(75);
+  motor_group(intakeupper, intakelower).stop();
+  drive(-91.27);
+    intakeupper.setVelocity(100, pct);
+    intakelower.setVelocity(100, pct);
+    intakelower.spinFor(fwd, 676767, deg, false);
+    intakeupper.spinFor(reverse, 676767, deg, false);
+  wait(1.75, sec);
+  motor_group(intakeupper, intakelower).stop();
+  drive(357.49);
+  turn(135);
 
-  motor_group(fLDrive, bLDrive, uLDrive).spinFor(-.18, rev, false);
-  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.18, rev);
-wait(.67, sec);
-  motor_group(fLDrive, bLDrive, uLDrive).spinFor(.4, rev, false);
-  motor_group(fRDrive, bRDrive, uRDrive).spinFor(.4, rev, false);
 
-  wait(.4, sec);
+  /*intakeupper.setVelocity(15, pct);
+  intakelower.setVelocity(100, pct);
+  intakelower.spinTo(25000, degrees, false);
+  intakeupper.spinTo(250, degrees, false);
 
-  motor_group(Uintake, Mintake, Lintake).spinFor(-2.5, rev, false);
-
-  //intake
-
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(300, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(300, degrees, false);
+ wait(2, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(-40, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(40, degrees, false);
+ wait(0.75, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(80, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(80, degrees, false);
+ wait(0.85, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(-180, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(-180, degrees, false);
+ wait(0.75, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(-65, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(65, degrees, false);
+ wait(0.5, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(270, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(270, degrees, false);
+ wait(1.3, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(-45, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(45, degrees, false);
+ wait(1, sec);
+ motor_group(fRDrive, bRDrive, uRDrive).spinFor(-160, degrees, false);
+ motor_group(fLDrive, bLDrive, uLDrive).spinFor(-160, degrees, false);
+ wait(0.2, sec);
+ intakeupper.setVelocity(100, pct);
+ intakelower.spinTo(250000, degrees, false);
+intakeupper.spinTo(-250000, degrees, false);
+*/
 }
-
 void usercontrol(void) {
-  // User control code here, inside the loop
-  while (1) {
+while (1) {
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   
-  //Drivetrain
+  //Drive
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
 
-  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd, (lateral)*.5 + rotational, pct);
-  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse, (lateral)*.5 - rotational, pct);
+  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral)*.5 + rotational,pct);
+  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral)*.5 - rotational,pct);
 
   //Intake
   if (Controller.ButtonL1.pressing()) {
-    motor_group(Uintake, Mintake, Lintake).spin(fwd, 80, pct);
+    intakelower.spin(fwd, 100, pct);
+    intakeupper.spin(fwd, 10, pct);
   }
   else if (Controller.ButtonL2.pressing()) {
-    motor_group(Uintake, Mintake, Lintake).spin(reverse, 80, pct);
+    intakeupper.spin(reverse, 80, pct);
+    intakelower.spin(reverse, 80, pct);
   }
   else if (Controller.ButtonR2.pressing()) {
-    Uintake.spin(reverse, 80, pct);
-    motor_group(Mintake, Lintake).spin(fwd, 80, pct);
+    intakeupper.spin(reverse, 80, pct);
+    intakelower.spin(fwd, 80, pct);
   }
   else {
-    motor_group(Uintake, Mintake, Lintake).stop();
+    intakeupper.stop();
+    intakelower.stop();
+
   }
 
   //Wings
-  if (Controller.ButtonB.pressing()) {
+  if (Controller.ButtonRight.pressing()) {
     wings.set(true);
   }
-  else if (Controller.ButtonDown.pressing()) {
+  else if (Controller.ButtonY.pressing()) {
     wings.set(false);
   }
 
   //Scraper
-  if (Controller.ButtonLeft.pressing()) {
+  if (Controller.ButtonDown.pressing()) {
     scraper.set(true);
   }
-  else if (Controller.ButtonUp.pressing()) {
+  else if (Controller.ButtonB.pressing()) {
     scraper.set(false);
   }
   
-    wait(20, msec); // Sleep the task for a short amount of time to
-                    // prevent wasted resources.
-  }
+  wait(30, msec);
+
 }
 
-//
-// Main will set up the competition functions and callbacks.
-//
+}
+
 int main() {
-  // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
-  // Run the pre-autonomous function.
   pre_auton();
 
-  // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(100, msec);
   }
