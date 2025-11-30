@@ -32,8 +32,10 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-  
-  drive(91.27); //prepare to pick up blocks
+  drive(12); 
+    Brain.Screen.clearScreen();
+
+  /*drive(91.27); //prepare to pick up blocks
     intakeupper.setVelocity(10, pct);
     intakelower.setVelocity(100, pct);
     intakelower.spinFor(fwd, 676767, deg, false);
@@ -85,7 +87,7 @@ void autonomous(void) {
   //score all blocks
 
   //test
-
+*/
 }
 void usercontrol(void) {
   Brain.Screen.clearScreen();
