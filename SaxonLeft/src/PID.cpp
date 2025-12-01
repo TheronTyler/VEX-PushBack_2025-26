@@ -32,6 +32,7 @@ void turn(float turnTarget) {
     // Integral
     turnIntegral += turnError * 0.02;       // 20ms loop time
     if (turnIntegral > 50) turnIntegral = 50;
+
 if (turnIntegral < -50) turnIntegral = -50;
  // Prevent runaway integral
 
@@ -59,27 +60,7 @@ if (turnIntegral < -50) turnIntegral = -50;
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();
 }
 
-/*void turn(float turnTarget){
-  sense.setHeading(180, degrees);
-  float turnKp = .401 ; //needs tuned
-  float turnKi = 0.01;//.09; //needs tuned
-  float turnKd = 0.3;//.29; //needs tuned
-  float turnError = sense.heading() - turnTarget;
-  
-  while(fabs(turnError) > 3){
-  turnError = turnTarget - sense.heading();
-  float previousTurnError = turnError;
-  float turnP = turnKp * turnError;
-  float turnI = turnI + (.02 * turnError * turnKi);
-  float turnD = turnKd * (turnError - previousTurnError)/1;
 
-    motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,  (turnP  + turnI + turnD), pct);
-    motor_group(fRDrive, bRDrive, uRDrive).spin(fwd,  -1*(turnP  + turnI + turnD), pct);
-    wait (20, msec);
-  }
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(brake);
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(fwd, 0, pct);
-}*/
 void drive(float driveTarget) {   // driveTarget is in degrees ( (DISTANCE / 47.33) * 360 )
 
   
