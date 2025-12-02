@@ -35,6 +35,7 @@ void autonomous(void) {
   turn(170); //Turn to 3 block
 
   intakelower.spinFor(fwd, 676767, deg, false); //pickup 3 block
+  intakeupper.setVelocity(10, pct);
   intakeupper.spinFor(fwd, 676767, deg, false); 
   
   drive(162.4); //drive to 3 block
@@ -51,37 +52,38 @@ void autonomous(void) {
 
   turn(67); //turn the back for the robot to middle goal
 
-  intakelower.stop();
-  intakeupper.stop();
-
-  drive(-110.29); //reverse to middle goal
+  drive(-114.09); //reverse to middle goal
   wait(10, msec);
 
   intakelower.spinFor(fwd, 676767, deg, false); //score 3 block into upper middle goal
+  intakeupper.setVelocity(100, pct);
   intakeupper.spinFor(reverse, 676767, deg, false); 
-  wait(1125, msec);
+  wait(750, msec);
 
-  intakelower.stop();
-  intakeupper.stop();
+  intakelower.spinFor(fwd, 676767, deg, false); //pickup 3 block
+  intakeupper.setVelocity(10, pct);
+  intakeupper.spinFor(fwd, 676767, deg, false); 
 
   drive(365.10); //drive in-line with match loader
 
-  turn(135); //turn to match loader
+  turn(130); //turn to match loader
 
   scraper.set(true); //drop scraper mechanism
   wait(250, msec);
 
   intakelower.spinFor(fwd, 676767, deg, false); //pickup matchload blocks
+  intakeupper.setVelocity(10, pct);
   intakeupper.spinFor(fwd, 676767, deg, false);
 
-  drive(135); //ram matchloader
+  drive(130); //ram matchloader
 
   wait(750, msec); //collect matchloader blocks
-  scraper.set(false);
 
-  drive(-270); //back up to long goal
+  drive(-70); //back up to long goal
+  drive(-200);
 
   intakelower.spinFor(fwd, 676767, deg, false); //score matchloader blocks into long goal
+  intakeupper.setVelocity(100, pct);
   intakeupper.spinFor(reverse, 676767, deg, false); 
 
   /*drive(91.27); //prepare to pick up blocks
