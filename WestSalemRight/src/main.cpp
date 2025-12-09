@@ -33,7 +33,6 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 
 void autonomous(void) {
   wings.set(true);
-  turn(190); //Turn to 3 block
   intakeupper.setVelocity(10, pct);
   intakelower.setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, deg, false); //pickup 3 block
@@ -51,24 +50,31 @@ turn(225); //turn to under long goal
 
   turn(260); //face long and loader area
 
-drive(266.21); //drive to long and loader area
+drive(280.21); //drive to long and loader area
 
 turn(225); //face back to goal
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(65, pct);
-  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.6, rev, false); //drive into goal
-  wait(0.5, sec);  
-  
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(50, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.9, rev, false); //drive into goal
+  wait(0.75, sec);  
+  drive(15);
+
+    motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
   intakeupper.setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, deg, false);
   intakeupper.spinFor(reverse, 676767, deg, false); //score into goal
 wait(1.5, sec);
   scraper.set(true);
-  drive(130);
-  turn(185);
-  drive(82.55); //drive to loader
+  drive(150);
+  drive(87.55); //drive to loader
   intakeupper.setVelocity(10, pct);
   intakelower.spinFor(fwd, 676767, deg, false); //take out loader
   intakeupper.spinFor(fwd, 676767, deg, false); 
+  wait(0.75, sec);
+  drive(-120);
+  drive(-120);
+  intakeupper.setVelocity(100, pct);
+  intakelower.spinFor(fwd, 676767, deg, false);
+  intakeupper.spinFor(reverse, 676767, deg, false); //score into goal
 
 
   /*drive(91.27); //prepare to pick up blocks

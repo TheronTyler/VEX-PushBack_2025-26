@@ -4,12 +4,12 @@
 		"json": 2
 	},
 	"project": {
-		"name": "WestSalemRight",
+		"name": "WestSalemLeft",
 		"description": "",
-		"creationDate": "12/2/2025, 12:48:29 PM",
+		"creationDate": "11/10/2025, 10:46:15 AM",
 		"platform": "V5",
 		"language": "cpp",
-		"slot": 2,
+		"slot": 1,
 		"sdkVersion": "V5_20240802_15_00_00",
 		"cpp": {
 			"includePath": [],
