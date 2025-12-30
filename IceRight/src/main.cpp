@@ -36,6 +36,7 @@ void autonomous(void) {
   intakeupper.setVelocity(10, pct);
   intakelower.setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, deg, false); //pickup 3 block
+  intakeupper.setVelocity(10, pct);
   intakeupper.spinFor(fwd, 676767, deg, false); 
   
   drive(162.4); //drive to 3 block
