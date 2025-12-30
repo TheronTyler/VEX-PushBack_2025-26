@@ -47,7 +47,7 @@ void autonomous(void) {
   wait(150, msec);
 
   drive(-150.93); //backup and align with middle goal
-  turn(107);
+  turn(111);
   wait(10, msec);
 
   intakelower.stop();
@@ -64,9 +64,9 @@ void autonomous(void) {
   intakelower.stop();
   intakeupper.stop();
 
-  drive(349.89); //drive in-line with match loader
+  drive(367.89); //drive in-line with match loader
 
-  turn(127); //turn to match loader
+  turn(133); //turn to match loader
 
   scraper.set(true); //drop scraper mechanism
   wait(250, msec);
@@ -76,10 +76,10 @@ void autonomous(void) {
   intakeupper.spinFor(fwd, 676767, deg, false);
 
   drive(85); //ram matchloader
-  drive(65); 
+  drive(54); 
 
 
-  wait(750, msec); //collect matchloader blocks
+  wait(550, msec); //collect matchloader blocks
 
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(55, pct);
   motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, .6, sec);
