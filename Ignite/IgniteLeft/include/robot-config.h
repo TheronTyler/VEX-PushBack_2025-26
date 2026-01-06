@@ -20,7 +20,9 @@ static motor intakeupper = motor(PORT19); //
 
 static digital_out wings = digital_out(Brain.ThreeWirePort.G);
 static digital_out scraper = digital_out(Brain.ThreeWirePort.H);
+static digital_out midGoal = digital_out(Brain.ThreeWirePort.F);
 
-static inertial sense = inertial(PORT10);
+
+static inertial sense = inertial(PORT14);
 
 static optical color_sort = optical(PORT12);

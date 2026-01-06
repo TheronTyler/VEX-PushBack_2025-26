@@ -32,7 +32,34 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-  
+  wings.set(true);
+  intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(10, pct);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  intakeupper.spinFor(fwd, 676767, rev, false); //intake
+  drive(155); //hit 3 cluster
+  scraper.set(true); 
+  wait(0.25, sec); //catch 3 cluster
+  turn(280); //turn to loader
+  drive(250); //drive to loader
+  turn(260); //align to loader
+  drive(100); //retrieve blocks
+  drive(35); 
+  wait(0.4, sec);
+  drive(-230); //go to score
+  motor_group(intakelower, intakeupper).setVelocity(100, pct);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  intakeupper.spinFor(reverse, 676767, rev, false); 
+  scraper.set(false);
+  wait(1.5, sec); //score
+  motor_group(intakelower, intakeupper).stop();
+  drive(50); //get off goal
+  turn(90); //face wall
+  drive(-90); // back up
+  turn(270); //face back to middle of field
+  wings.set(false); //drop wing
+  drive(-180); //push blocks to control zone
+
 }
 void usercontrol(void) {
   
@@ -59,25 +86,32 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
     intakeupper.spin(reverse, 100, pct);
     intakelower.spin(fwd, 100, pct);
   }
+  else if (Controller.ButtonR1.pressing()) {
+    midGoal.set(true);
+    intakeupper.spin(reverse, 100, pct);
+    intakelower.spin(fwd, 100, pct);
+  }
   else {
     intakeupper.stop();
     intakelower.stop();
+    midGoal.set(false);
+
 
   }
 
   //Wings
-  if (Controller.ButtonRight.pressing()) {
+  if (Controller.ButtonDown.pressing()) {
     wings.set(true);
   }
-  else if (Controller.ButtonY.pressing()) {
+  else if (Controller.ButtonB.pressing()) {
     wings.set(false);
   }
 
   //Scraper
-  if (Controller.ButtonDown.pressing()) {
+  if (Controller.ButtonRight.pressing()) {
     scraper.set(true);
   }
-  else if (Controller.ButtonB.pressing()) {
+  else if (Controller.ButtonY.pressing()) {
     scraper.set(false);
   }
   
