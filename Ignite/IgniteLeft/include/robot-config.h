@@ -15,7 +15,7 @@ static motor fRDrive = motor(PORT10, ratio36_1); //
 static motor bRDrive = motor(PORT20, ratio36_1); //
 static motor uRDrive = motor(PORT17, ratio36_1, true); //
 
-static motor intakelower = motor(PORT15);
+static motor intakelower = motor(PORT15); //
 static motor intakeupper = motor(PORT19); //
 
 static digital_out wings = digital_out(Brain.ThreeWirePort.G);
