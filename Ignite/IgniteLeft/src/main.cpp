@@ -43,7 +43,7 @@ void autonomous(void) {
   turn(60); //turn to mid goal
   intakelower.spinFor(reverse, .5, rev, false);
   drive(-70);
-  drive(-70);
+  drive(-80);
   midGoal.set(true);
   intakeupper.spinFor(reverse, 676767, rev, false);
   intakelower.spinFor(fwd, 676767, rev, false);
@@ -55,12 +55,13 @@ void autonomous(void) {
   intakeupper.spinFor(fwd, 676767, rev, false);
   drive(250);
   wait(0.01, sec);
-  drive(170);
-  turn(133);
-  drive(70);
-  drive(20);
-  drive(-10);
-  drive(10);
+  drive(180);
+  turn(135);
+  drive(80);
+  drive(38);
+  wait(0.3, sec);
+  drive(-15);
+  drive(15);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 65, pct);
 wait(1.1, sec);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();

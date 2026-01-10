@@ -41,24 +41,28 @@ void autonomous(void) {
   scraper.set(true); 
   wait(0.25, sec); //catch 3 cluster
   turn(280); //turn to loader
-  drive(250); //drive to loader
-  turn(260); //align to loader
-  drive(100); //retrieve blocks
-  drive(35); 
+  drive(247); //drive to loader
+  turn(257); //align to loader
+  drive(80); //retrieve blocks
+  drive(31); 
+  drive(15);
+  drive(-15);
+  drive(18);
+  drive(-18);
   wait(0.4, sec);
   drive(-230); //go to score
   motor_group(intakelower, intakeupper).setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
   intakeupper.spinFor(reverse, 676767, rev, false); 
   scraper.set(false);
-  wait(1.5, sec); //score
+  wait(1.9, sec); //score
   motor_group(intakelower, intakeupper).stop();
-  drive(50); //get off goal
+  drive(70); //get off goal
   turn(90); //face wall
-  drive(-90); // back up
-  turn(270); //face back to middle of field
+  drive(-95); // back up
+  turn(269); //face back to middle of field
   wings.set(false); //drop wing
-  drive(-180); //push blocks to control zone
+  drive(-200); //push blocks to control zone
 
 }
 void usercontrol(void) {
