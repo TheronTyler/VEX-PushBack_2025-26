@@ -32,57 +32,57 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-intakelower.setVelocity(100, pct);
+/*intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(100, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
 intakeupper.spinFor(reverse, 676767, rev, false);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.1, sec);
 scraper.set(true);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 0.8, sec);
-scraper.set(false);
+scraper.set(false); */
  
-/*  wings.set(true);
-drive(295);
-turn(265);
+wings.set(true);
+drive(290);
+turn(267);
 scraper.set(true);
 wait(1, sec); //approach loader1 
 intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(10, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
 intakeupper.spinFor(fwd, 676767, rev, false);
-drive(63);
+drive(67);
 wait(0.3, sec);
-drive(-20);
+drive(-25);
 wait(0.3, sec);
-drive(20);
+drive(25);
 wait(0.3, sec);
-drive(-20);
+drive(-25);
 wait(0.3, sec);
-drive(20);
+drive(25);
 wait(0.3, sec);
 drive(-50);
 scraper.set(false); //remove from loader 1
 turn(93);
 drive(90);
+turn(95);
+drive(365);
+drive(360); //drive down corridor
 turn(90);
-drive(370);
-drive(370); //drive down corridor
-turn(90);
-drive(110);
+drive(104);
 turn(276);
-drive(-75); //prepare to score
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.7, sec); //prepare to score loader 1
 intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(100, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
 intakeupper.spinFor(reverse, 676767, rev, false);
 scraper.set(true); //prepare for loader 2
-wait(1.5, sec); //finish scoring 
-drive(150);
+wait(4, sec); //finish scoring loader 1
 intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(10, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
-intakeupper.spinFor(fwd, 676767, rev, false); //pickup loader 2
-drive(60);
+intakeupper.spinFor(fwd, 676767, rev, false); 
+drive(175);
+drive(68);
 wait(0.3, sec);
 drive(-20);
 wait(0.3, sec);
@@ -91,8 +91,25 @@ wait(0.3, sec);
 drive(-20);
 wait(0.3, sec);
 drive(20);
-wait(0.3, sec);
-*/
+wait(0.3, sec); //pickup loader 2
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1.8, sec); //prepare to score loader 2
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(100, pct);
+intakelower.spinFor(fwd, 676767, rev, false);
+intakeupper.spinFor(reverse, 676767, rev, false);
+scraper.set(false);
+wait(4, sec); //score loader 2
+drive(75); //get off goal
+turn(270); //turn towards wall
+drive(90); //drive to wall
+turn(260); //turn towards red parking zone
+drive(350); 
+drive(320); //drive down corridor
+turn(235); //work on
+drive(200); //work on
+drive(130); //work on
+scraper.set(true);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 0.75, sec); //park
 }
 void usercontrol(void) {
   
@@ -103,8 +120,8 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
 
-  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral)*.5 + rotational,pct);
-  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral)*.5 - rotational,pct);
+  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,((lateral)*0.5) + rotational,pct);
+  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,((lateral)*0.5) - rotational,pct);
 
   //Intake
   if (Controller.ButtonL1.pressing()) {

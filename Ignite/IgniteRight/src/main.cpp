@@ -41,16 +41,16 @@ void autonomous(void) {
   scraper.set(true); 
   wait(0.25, sec); //catch 3 cluster
   turn(280); //turn to loader
-  drive(247); //drive to loader
-  turn(257); //align to loader
-  drive(80); //retrieve blocks
+  drive(250); //drive to loader
+  turn(258); //align to loader
+  drive(87); //retrieve blocks
   drive(31); 
   drive(15);
   drive(-15);
   drive(18);
   drive(-18);
-  wait(0.4, sec);
-  drive(-230); //go to score
+  wait(0.3, sec);
+  drive(-222); //go to score
   motor_group(intakelower, intakeupper).setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
   intakeupper.spinFor(reverse, 676767, rev, false); 
@@ -59,7 +59,7 @@ void autonomous(void) {
   motor_group(intakelower, intakeupper).stop();
   drive(70); //get off goal
   turn(90); //face wall
-  drive(-95); // back up
+  drive(-90); // back up
   turn(269); //face back to middle of field
   wings.set(false); //drop wing
   drive(-200); //push blocks to control zone
@@ -74,8 +74,8 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
 
-  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral)*.5 + rotational,pct);
-  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral)*.5 - rotational,pct);
+  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral) + rotational,pct);
+  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral) - rotational,pct);
 
   //Intake
   if (Controller.ButtonL1.pressing()) {

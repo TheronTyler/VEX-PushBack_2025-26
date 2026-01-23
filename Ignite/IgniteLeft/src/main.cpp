@@ -83,8 +83,8 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
 
-  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral)*.5 + rotational,pct);
-  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral)*.5 - rotational,pct);
+  motor_group(fLDrive, bLDrive, uLDrive).spin(fwd,(lateral) + rotational,pct);
+  motor_group(fRDrive, bRDrive, uRDrive).spin(reverse,(lateral) - rotational,pct);
 
   //Intake
   if (Controller.ButtonL1.pressing()) {
