@@ -1,15 +1,15 @@
 {
 	"extension": {
-		"version": "0.7.2025041600",
+		"version": "0.8.2026011200",
 		"json": 2
 	},
 	"project": {
-		"name": "IgniteLeft",
+		"name": "RumbleLeft",
 		"description": "",
-		"creationDate": "1/6/2026, 12:44:17 PM",
+		"creationDate": "1/27/2026, 11:15:51 AM",
 		"platform": "V5",
 		"language": "cpp",
-		"slot": 8,
+		"slot": 1,
 		"sdkVersion": "V5_20240802_15_00_00",
 		"cpp": {
 			"includePath": [],

@@ -36,39 +36,79 @@ void autonomous(void) {
   intakelower.setVelocity(100, pct);
   intakeupper.setVelocity(10, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
-  intakeupper.spinFor(fwd, 676767, rev, false); //intake
-  drive(165); //hit 3 cluster
-  scraper.set(true); 
-  wait(0.25, sec); //catch 3 cluster
-  turn(280); //turn to loader/goal
-  drive(246); //drive to loader/goal
-  turn(247); //turn to face loader
-  //drive(100); //retrieve blocks
-  //drive(15);
-  //drive(-15);
-  //drive(18);
-  //drive(-18);
-  //wait(0.3, sec);
-  drive(-147); //go to score
-  motor_group(intakelower, intakeupper).setVelocity(100, pct);
+  intakeupper.spinFor(fwd, 676767, rev, false);
+  drive(170);
+  drive(30);
+  turn(50);
+  intakelower.spinFor(reverse, 0.07, rev, false);
+  drive(-177);
+  midGoal.set(true);
+  intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(100, pct);
+  intakeupper.spinFor(fwd, 676767, rev, false);
   intakelower.spinFor(fwd, 676767, rev, false);
-  intakeupper.spinFor(reverse, 676767, rev, false); 
+wait(0.75, sec);
+midGoal.set(false);
+motor_group(intakeupper, intakelower).stop();
+drive(440);
+turn(133);
+
+ 
+
+    /*wings.set(true);
+  intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(10, pct);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  intakeupper.spinFor(fwd, 676767, rev, false); //intake
+  drive(155); //hit 3 cluster
+  scraper.set(true); 
+  drive(80);
+  turn(60); //turn to mid goal
+  intakelower.spinFor(reverse, .2, rev, false);
+  drive(-80);
+  drive(-80);
+  drive(10);
+  midGoal.set(true);
+  intakeupper.spinFor(reverse, 676767, rev, false);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  wait(1, sec);
+  midGoal.set(false);
+  intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(10, pct);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  intakeupper.spinFor(fwd, 676767, rev, false);
+  drive(248); //drive to loader/long goal
+  wait(0.01, sec);
+  drive(180);
+  turn(137); //turn to loader
+  drive(80);
+  drive(32);
+  wait(0.3, sec);
+  drive(-15);
+  drive(15); //retrieve from loader
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 50, pct);
+wait(1.3, sec);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();
+  intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(100, pct);
+  intakeupper.spinFor(reverse, 676767, rev, false);
+  intakelower.spinFor(fwd, 676767, rev, false);
   scraper.set(false);
-  wait(1.9, sec); //score
-  motor_group(intakelower, intakeupper).stop();
-  drive(70); //get off goal
-  turn(90); //face wall
-  drive(-90); // back up
-  turn(269); //face back to middle of field
-  wings.set(false); //drop wing
-  drive(-200); //push blocks to control zone
+  drive(25);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 100, pct);
+  wait(0.2, sec);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop(); */
+
+
+
+
 
 }
 void usercontrol(void) {
   
 while (1) {
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
-  
+
   //Drive
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
@@ -91,7 +131,7 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(co
   }
   else if (Controller.ButtonR1.pressing()) {
     midGoal.set(true);
-    intakeupper.spin(reverse, 100, pct);
+    intakeupper.spin(fwd, 100, pct);
     intakelower.spin(fwd, 100, pct);
   }
   else {

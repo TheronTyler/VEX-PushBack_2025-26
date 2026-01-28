@@ -76,22 +76,12 @@ void drive(float driveTarget) {   // driveTarget is in degrees ( (DISTANCE / 47.
 
   fLDrive.setPosition(0, deg);
   fRDrive.setPosition(0, deg);
-  uRDrive.setPosition(0, deg);
-  uLDrive.setPosition(0, deg);
-  bLDrive.setPosition(0, deg);
-  bRDrive.setPosition(0, deg);
-
 
   while (true) {
-    float currentPos = 
-    ((((fRDrive.position(deg) + bRDrive.position(deg) + uRDrive.position(deg)) / 3.0) 
-    +
-    (fLDrive.position(deg) + bLDrive.position(deg) + uLDrive.position(deg) / 3.0))
-    /2);
-
+    float currentPos = (fLDrive.position(deg) + fRDrive.position(deg)) / 2.0;
     driveError = driveTarget - currentPos;
 
-    if (fabs(driveError) < 3) {
+    if (fabs(driveError) < 10) {
       break;
     }
 

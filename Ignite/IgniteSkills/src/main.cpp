@@ -108,6 +108,7 @@ drive(320); //drive down corridor
 turn(235); //work on
 drive(200); //work on
 drive(130); //work on
+wait(0.4, sec);
 scraper.set(true);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 0.75, sec); //park
 }

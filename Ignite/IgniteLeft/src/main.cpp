@@ -32,7 +32,15 @@ motor_group(intakeupper, intakelower).setStopping(brake);
 }
 
 void autonomous(void) {
-  wings.set(true);
+  turn(270);
+  wait(0.5, sec);
+  turn(90);
+  wait(0.5, sec);
+  turn(270);
+  wait(0.5, sec);
+  turn(90);
+
+    /*wings.set(true);
   intakelower.setVelocity(100, pct);
   intakeupper.setVelocity(10, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
@@ -41,9 +49,10 @@ void autonomous(void) {
   scraper.set(true); 
   drive(80);
   turn(60); //turn to mid goal
-  intakelower.spinFor(reverse, .5, rev, false);
-  drive(-70);
+  intakelower.spinFor(reverse, .2, rev, false);
   drive(-80);
+  drive(-80);
+  drive(10);
   midGoal.set(true);
   intakeupper.spinFor(reverse, 676767, rev, false);
   intakelower.spinFor(fwd, 676767, rev, false);
@@ -53,23 +62,29 @@ void autonomous(void) {
   intakeupper.setVelocity(10, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
   intakeupper.spinFor(fwd, 676767, rev, false);
-  drive(250);
+  drive(248); //drive to loader/long goal
   wait(0.01, sec);
   drive(180);
-  turn(135);
+  turn(137); //turn to loader
   drive(80);
-  drive(38);
+  drive(32);
   wait(0.3, sec);
   drive(-15);
-  drive(15);
-motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 65, pct);
-wait(1.1, sec);
+  drive(15); //retrieve from loader
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 50, pct);
+wait(1.3, sec);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop();
   intakelower.setVelocity(100, pct);
   intakeupper.setVelocity(100, pct);
   intakeupper.spinFor(reverse, 676767, rev, false);
   intakelower.spinFor(fwd, 676767, rev, false);
   scraper.set(false);
+  drive(25);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spin(reverse, 100, pct);
+  wait(0.2, sec);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).stop(); */
+
+
 
 
 
@@ -78,7 +93,7 @@ void usercontrol(void) {
   
 while (1) {
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setStopping(coast);
-  
+
   //Drive
   int rotational = Controller.Axis3.position(pct);
   int lateral = Controller.Axis1.position(pct);
