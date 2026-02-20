@@ -37,21 +37,55 @@ void autonomous(void) {
   intakeupper.setVelocity(10, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
   intakeupper.spinFor(fwd, 676767, rev, false);
-  drive(170);
-  drive(30);
-  turn(50);
-  intakelower.spinFor(reverse, 0.07, rev, false);
-  drive(-177);
+  drive(180);
+  drive(55); //intake cluster
+  turn(58);
+  intakelower.spinFor(reverse, 0.04, rev, false);
+  //drive(-167);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(25, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.9, sec);
   midGoal.set(true);
   intakelower.setVelocity(100, pct);
   intakeupper.setVelocity(100, pct);
   intakeupper.spinFor(fwd, 676767, rev, false);
   intakelower.spinFor(fwd, 676767, rev, false);
-wait(0.75, sec);
-midGoal.set(false);
+wait(0.85, sec); //score midgoal
 motor_group(intakeupper, intakelower).stop();
-drive(440);
-turn(133);
+wait(0.05, sec);
+midGoal.set(false);
+drive(350); //loader and long goal 
+turn(195);
+drive(70); //realign
+turn(121);
+wait(0.25, sec);//drive to long
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1.15, sec);
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(100, pct);
+intakeupper.spinFor(reverse, 676767, rev, false);
+intakelower.spinFor(fwd, 676767, rev, false); //score into long goal
+scraper.set(true);
+wait(0.75, sec);
+motor_group(intakeupper, intakelower).stop();
+intakelower.setVelocity(100, pct);
+  intakeupper.setVelocity(10, pct);
+  intakelower.spinFor(fwd, 676767, rev, false);
+  intakeupper.spinFor(fwd, 676767, rev, false);
+drive(125);
+drive(110);
+drive(-10);
+drive(15);//take out loader
+wait(0.1, sec);
+drive(-15);
+drive(15);
+wait(0.1, sec);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(60, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1.2, sec);
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(100, pct);
+intakeupper.spinFor(reverse, 676767, rev, false);
+intakelower.spinFor(fwd, 676767, rev, false);
+scraper.set(false);//done
 
  
 

@@ -165,7 +165,10 @@ bool Chassis::x_pos_mirrored() { return x_pos_mirrored_; }
 bool Chassis::y_pos_mirrored() { return y_pos_mirrored_; }
 
 float Chassis::get_ForwardTracker_position() {
-    return forward_tracker.position(vex::deg) * forward_tracker_inch_to_deg_ratio;
+    float wheel_diameter = 3.25; 
+    float wheel_ratio = 0.75;
+
+    return right_drive.position(vex::deg) * wheel_ratio /360.0 * M_PI * wheel_diameter;
 }
 
 float Chassis::get_SidewaysTracker_position() {
@@ -270,10 +273,12 @@ void Chassis::split_arcade_curved() {
 }
 
 void Chassis::split_arcade() {
-    float throttle = deadband(vex::controller(vex::primary).Axis3.value(), control_throttle_deadband);
-    float turn = deadband(vex::controller(vex::primary).Axis1.value(), control_turn_deadband);
-    chassis.left_drive.spin(vex::fwd, percent_to_volt(throttle + turn), volt);
-    chassis.right_drive.spin(vex::fwd, percent_to_volt(throttle - turn), volt);
+    int rotational = Controller.Axis3.position(pct);
+  int lateral = Controller.Axis1.position(pct);
+int drive = (lateral+rotational);
+int turn = (lateral-rotational);
+    chassis.left_drive.spin(vex::fwd, drive, volt);
+    chassis.right_drive.spin(vex::fwd, turn, volt);
 }
 
 void Chassis::tank() {

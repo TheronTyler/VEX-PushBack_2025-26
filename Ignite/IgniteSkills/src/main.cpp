@@ -42,7 +42,7 @@ motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 0
 scraper.set(false); */
  
 wings.set(true);
-drive(290);
+drive(300);
 turn(267);
 scraper.set(true);
 wait(1, sec); //approach loader1 
@@ -50,7 +50,7 @@ intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(10, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
 intakeupper.spinFor(fwd, 676767, rev, false);
-drive(67);
+drive(73);
 wait(0.3, sec);
 drive(-25);
 wait(0.3, sec);
@@ -60,6 +60,33 @@ drive(-25);
 wait(0.3, sec);
 drive(25);
 wait(0.3, sec);
+
+/*//vibe code
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 3, sec);
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(100, pct);
+intakelower.spinFor(fwd, 676767, rev, false);
+intakeupper.spinFor(reverse, 676767, rev, false);
+wait(5, sec);
+scraper.set(false);
+drive(150);
+turn(225);
+drive(160);
+motor_group(fLDrive, bLDrive, uLDrive).spinFor(fwd, 0.25, sec); //park
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(20, pct);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 1, sec);
+drive(-20);
+scraper.set(true);
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(10, pct);
+intakelower.spinFor(fwd, 676767, rev, false);
+intakeupper.spinFor(fwd, 676767, rev, false);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 1.125, sec);
+scraper.set(false);
+*/
+
 drive(-50);
 scraper.set(false); //remove from loader 1
 turn(93);
@@ -70,7 +97,8 @@ drive(360); //drive down corridor
 turn(90);
 drive(104);
 turn(276);
-motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.7, sec); //prepare to score loader 1
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1, sec); //prepare to score loader 1
 intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(100, pct);
 intakelower.spinFor(fwd, 676767, rev, false);
@@ -91,7 +119,13 @@ wait(0.3, sec);
 drive(-20);
 wait(0.3, sec);
 drive(20);
+wait(0.3, sec);
+drive(-20);
+wait(0.3, sec);
+drive(20);
 wait(0.3, sec); //pickup loader 2
+motor_group(intakelower, intakeupper).stop();
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
 motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1.8, sec); //prepare to score loader 2
 intakelower.setVelocity(100, pct);
 intakeupper.setVelocity(100, pct);
@@ -100,17 +134,50 @@ intakeupper.spinFor(reverse, 676767, rev, false);
 scraper.set(false);
 wait(4, sec); //score loader 2
 drive(75); //get off goal
-turn(270); //turn towards wall
-drive(90); //drive to wall
-turn(260); //turn towards red parking zone
-drive(350); 
-drive(320); //drive down corridor
-turn(235); //work on
-drive(200); //work on
-drive(130); //work on
-wait(0.4, sec);
+turn(90); //turn towards center
+motor_group(intakeupper, intakelower).stop();
+drive(300);
+drive(300);
+drive(320);
+drive(-130);
+turn(273);
 scraper.set(true);
-motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(fwd, 0.75, sec); //park
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(10, pct);
+intakelower.spinFor(fwd, 676767, rev, false);
+intakeupper.spinFor(fwd, 676767, rev, false); 
+drive(162);
+wait(0.3, sec);
+drive(-20);
+wait(0.3, sec);
+drive(20);
+wait(0.3, sec);
+drive(-20);
+wait(0.3, sec);
+drive(20);
+wait(0.3, sec);
+drive(-20);
+wait(0.3, sec);
+drive(20);
+drive(-50);
+scraper.set(false); //remove from loader 3
+turn(93);
+drive(90);
+turn(95);
+drive(365);
+drive(360); //drive down corridor
+turn(90);
+drive(104);
+turn(276);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 1, sec); //prepare to score loader 1
+intakelower.setVelocity(100, pct);
+intakeupper.setVelocity(100, pct);
+intakelower.spinFor(fwd, 676767, rev, false);
+intakeupper.spinFor(reverse, 676767, rev, false);
+scraper.set(true); //prepare for loader 4
+wait(4, sec); //finish scoring loader 3
+
 }
 void usercontrol(void) {
   

@@ -41,25 +41,21 @@ void autonomous(void) {
   scraper.set(true); 
   wait(0.25, sec); //catch 3 cluster
   turn(280); //turn to loader/goal
-  drive(246); //drive to loader/goal
-  turn(247); //turn to face loader
-  //drive(100); //retrieve blocks
-  //drive(15);
-  //drive(-15);
-  //drive(18);
-  //drive(-18);
-  //wait(0.3, sec);
-  drive(-147); //go to score
+  drive(255); //drive to loader/goal
+  turn(249); //turn to face loader
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).setVelocity(40, pct);
+  motor_group(fLDrive, bLDrive, uLDrive, fRDrive, bRDrive, uRDrive).spinFor(reverse, 0.75, sec);
+  //drive(-140); //go to score
   motor_group(intakelower, intakeupper).setVelocity(100, pct);
   intakelower.spinFor(fwd, 676767, rev, false);
   intakeupper.spinFor(reverse, 676767, rev, false); 
   scraper.set(false);
-  wait(1.9, sec); //score
+  wait(1.4, sec); //score
   motor_group(intakelower, intakeupper).stop();
   drive(70); //get off goal
   turn(90); //face wall
   drive(-90); // back up
-  turn(269); //face back to middle of field
+  turn(269); //face back to opponents side of field
   wings.set(false); //drop wing
   drive(-200); //push blocks to control zone
 
