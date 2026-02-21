@@ -5,6 +5,7 @@ using namespace mik;
 
 void relative_mode_constants() {
   	default_constants();
+	chassis.set_drive_constants(10,1.5,0,10,0);
 }
 
 void odom_mode_constants() {
@@ -15,7 +16,7 @@ void test_drive() {
 	chassis.drive_distance(6);
 	chassis.drive_distance(12);
 	chassis.drive_distance(18);
-	chassis.drive_distance(-36);
+	chassis.drive_distance(-36, { .timeout = 1500 });
 }
 
 void test_heading() {

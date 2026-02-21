@@ -2,7 +2,6 @@
 
 using namespace vex;
 using namespace mik;
-
 task UI;
 
 static int run_UI() {
@@ -21,6 +20,7 @@ void pre_auton() {
 void auton(void) {
     UI.stop();
     auton_scr->start_auton();
+    
 }
 
 void user_control(void) {
@@ -28,14 +28,13 @@ void user_control(void) {
 
     // How you want your drivetrain to stop during driver
     chassis.set_brake_type(brakeType::coast);
-    
-    assembly.init();
 
     while (true) {
         if (!control_disabled()) {
             // Add your user control code here
             chassis.control(drive_mode::SPLIT_ARCADE_CURVED);
             assembly.control();
+
         }
         task::sleep(5);
     }
